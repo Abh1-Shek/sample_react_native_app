@@ -1,11 +1,13 @@
 import { Pressable, Image, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import DialogBox from './DialogBox';
 
 
 
 function ProfilePicture({ onLongPress }) { // pass the chooseImg func here
     const [image, setImage] = useState(null);
+    const [dialog_visible, set_visible] = useState(false);
 
     useEffect(() => {
 		(async () => {
@@ -31,18 +33,32 @@ function ProfilePicture({ onLongPress }) { // pass the chooseImg func here
 		if (!result.cancelled) {
 		   setImage(result.uri);
 		}
+        set_visible(false);
 	};
+    function handleOnLongPress() {
+        set_visible(true);
+    }
+    function handleRemoveImage() {
+        setImage(null);
+        set_visible(false);
+    }
+
     
     
     return (
-        <Pressable onLongPress={chooseImg}>
+        <Pressable onLongPress={handleOnLongPress}>
+            <DialogBox visible={dialog_visible}
+                       title = {"Image Options"}
+                       description = {"choose image option!"}
+                       addImage = {chooseImg}
+                       removeImage = {handleRemoveImage}
+                       set_visible = {set_visible}/>
             {!image && <Image 
                 style={styles.square}
                 source={require('../assets/shinchan.jpg')}></Image>}
             {image && <Image 
                 style={styles.square}
                 source={{uri: image}}></Image>}
-            
         </Pressable>
     );
 }
