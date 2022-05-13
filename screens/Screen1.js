@@ -1,6 +1,7 @@
 import { StyleSheet, View, Image, Text, Platform, Button } from 'react-native';
 import { Colors } from '../constants/Colors';
 import ProfilePicture from '../components/ProfilePicture';
+import Story from '../components/Story';
 
 function Screen1() {
     return (
