@@ -54,10 +54,10 @@ function ProfilePicture({ onLongPress }) { // pass the chooseImg func here
                        removeImage = {handleRemoveImage}
                        set_visible = {set_visible}/>
             {!image && <Image 
-                style={styles.square}
+                style={styles.circle}
                 source={require('../assets/shinchan.jpg')}></Image>}
             {image && <Image 
-                style={styles.square}
+                style={styles.circle}
                 source={{uri: image}}></Image>}
         </Pressable>
     );
@@ -68,7 +68,7 @@ export default ProfilePicture;
 
 
 const styles = StyleSheet.create({
-    square: {
+    circle: {
         height: 200,
         width: 200,
         borderRadius: 100,
