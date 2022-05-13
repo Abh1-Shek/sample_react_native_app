@@ -3,14 +3,26 @@ import * as Progress from 'react-native-progress';
 import { useEffect, useState, useRef } from 'react';
 import { Animated } from 'react-native';
 
+const delay = 5000;
 
-export default function Story({imageUrl, description, caption}) {
+
+export default function Story({imageUrl, description, caption, navigation}) {
     const [progress, setProgress] = useState(0);
+
+    useEffect(
+        () => {
+            const timer = setTimeout(() => navigation.navigate('Home'), delay);
+            
+            return () => {
+                clearTimeout(timer);
+            }
+        }
+    , []);
     
     return (
         <View style={styles.root}>
             <View>
-                <AnimatedProgressView progress={1} />
+                <AnimatedProgressView progress={1} navigation={navigation}/>
             </View>
             <View>
                 <View>
@@ -25,15 +37,15 @@ export default function Story({imageUrl, description, caption}) {
     );
 }
 
-function AnimatedProgressView({ progress, style }) {
+function AnimatedProgressView({ progress, style, navigation }) {
     const value = useRef(new Animated.Value(0));
     const [width, setWidth] = useState(0);
   
     useEffect(() => {
       // Animated.spring(value.current, { toValue: progress, duration: 5000}).start();
-      Animated.timing(value.current, {toValue: progress, duration: 5000}).start();
+      Animated.timing(value.current, {toValue: progress, duration: delay}).start();
     }, [progress]);
-  
+
     return (
       <View
         style={[styles.track, style]}
@@ -61,8 +73,8 @@ function AnimatedProgressView({ progress, style }) {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: 20,
     },
     square: {
         height: 200,
