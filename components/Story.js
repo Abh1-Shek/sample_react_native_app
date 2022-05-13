@@ -1,25 +1,17 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
 import * as Progress from 'react-native-progress';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { Animated } from 'react-native';
 
-function Story({imageUrl, description, caption}) {
-    const [value, updateValue] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            updateValue(oldValue => {
-                const newValue = oldValue + 0.17; // 1/60
-                if (newValue == 100) {
-                    clearInterval(interval);
-                }
-                return newValue;
-            });
-        }, 1000);
-    }, []);
+export default function Story({imageUrl, description, caption}) {
+    const [progress, setProgress] = useState(0);
     
     return (
         <View style={styles.root}>
-            <Progress.Bar progress={value} width={200} />
+            <View>
+                <AnimatedProgressView progress={1} />
+            </View>
             <View>
                 <View>
                     <Image source={{uri: imageUrl}} style={styles.square}/>
@@ -33,8 +25,38 @@ function Story({imageUrl, description, caption}) {
     );
 }
 
-
-export default Story;
+function AnimatedProgressView({ progress, style }) {
+    const value = useRef(new Animated.Value(0));
+    const [width, setWidth] = useState(0);
+  
+    useEffect(() => {
+      // Animated.spring(value.current, { toValue: progress, duration: 5000}).start();
+      Animated.timing(value.current, {toValue: progress, duration: 5000}).start();
+    }, [progress]);
+  
+    return (
+      <View
+        style={[styles.track, style]}
+        onLayout={(event) => setWidth(event.nativeEvent.layout.width)}>
+        <Animated.View
+          style={[
+            styles.fill,
+            {
+              transform: [
+                {
+                  translateX: value.current.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [-width, 0],
+                    overflow: 'clamp',
+                  }),
+                },
+              ],
+            },
+          ]}
+        />
+      </View>
+    );
+  }
 
 const styles = StyleSheet.create({
     root: {
@@ -45,5 +67,16 @@ const styles = StyleSheet.create({
     square: {
         height: 200,
         width: 200,
+    },
+    track: {
+        width: 300,
+        minHeight: 4,
+        borderRadius: 2,
+        overflow: 'hidden',
+        backgroundColor: '#ddd',
+    },
+    fill: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'blue',
     },
 });
