@@ -2,10 +2,11 @@ import { Pressable, Image, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import DialogBox from './DialogBox';
+import { Colors } from '../constants/Colors';
 
 
 
-function ProfilePicture({ onLongPress }) { // pass the chooseImg func here
+function ProfilePicture({ onLongPress, viewed }) { // pass the chooseImg func here
     const [image, setImage] = useState(null);
     const [dialog_visible, set_visible] = useState(false);
 
@@ -54,10 +55,10 @@ function ProfilePicture({ onLongPress }) { // pass the chooseImg func here
                        removeImage = {handleRemoveImage}
                        set_visible = {set_visible}/>
             {!image && <Image 
-                style={styles.circle}
+                style={viewed ? styles.circle : styles.circleNotViewed}
                 source={require('../assets/shinchan.jpg')}></Image>}
             {image && <Image 
-                style={styles.circle}
+                style={viewed ? styles.circle : styles.circleNotViewed}
                 source={{uri: image}}></Image>}
         </Pressable>
     );
@@ -72,5 +73,14 @@ const styles = StyleSheet.create({
         height: 200,
         width: 200,
         borderRadius: 100,
+        borderWidth: 8,
+        borderColor: Colors.grey,
+    },
+    circleNotViewed: {
+        height: 200,
+        width: 200,
+        borderRadius: 100,
+        borderWidth: 8,
+        borderColor: Colors.yellow,
     },
 });
