@@ -17,6 +17,9 @@ export default function App() {
         <Stack.Screen 
           name="Story"
           component={Screen2}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

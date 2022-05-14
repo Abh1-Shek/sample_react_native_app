@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
-import * as Progress from 'react-native-progress';
 import { useEffect, useState, useRef } from 'react';
 import { Animated } from 'react-native';
+import { Colors } from '../constants/Colors';
 
 const delay = 5000;
 
@@ -27,7 +27,7 @@ export default function Story({imageUrl, description, caption, navigation}) {
             <View>
                 <View style={styles.mainStory}>
                     <Image defaultSource = {'../assets/shinchan.jpg'} source={{uri: imageUrl}} style={styles.square}/>
-                    <Text>{description}</Text>
+                    <Text style={styles.descriptionText}>{description}</Text>
                 </View>
                 <View style={styles.captionContainer}>
                     <Text style={styles.captionText}>{caption}</Text>
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 20,
+        paddingTop: 40,
+        backgroundColor: Colors.storyBackground,
     },
     square: {
         height: 200,
@@ -83,24 +84,30 @@ const styles = StyleSheet.create({
     },
     track: {
         width: 300,
-        minHeight: 4,
-        borderRadius: 2,
+        minHeight: 6,
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: 'white',
         overflow: 'hidden',
-        backgroundColor: '#ddd',
+        backgroundColor: Colors.storyBackground,
     },
     fill: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'blue',
+        backgroundColor: 'white',
     },
     mainStory: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     captionContainer: {
-        marginTop: 20,
+        marginTop: 50,
     },
     captionText: {
         fontSize: 24,
         textAlign: 'center',
-    }
+        color: 'white',
+    },
+    descriptionText: {
+        color: 'white'
+    },
 });
