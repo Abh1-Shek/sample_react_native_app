@@ -15,10 +15,12 @@ function Screen1({ navigation }) {
     return (
         <View style={styles.outterContainer}>
             <ProfilePicture viewed={viewed}/>
-            <Text>Shinchan</Text>
-            <Text>My favourite show</Text>
             <View>
-                <Button onPress={goToScreen2} title="STORY"/>
+                {(!viewed) && <Button onPress={goToScreen2} title="STORY"/>}
+            </View>
+            <View style={styles.infoContainer}>
+                <Text>Shinchan</Text>
+                <Text>My favourite show</Text>
             </View>
         </View>
     );
@@ -30,7 +32,12 @@ export default Screen1;
 const styles = StyleSheet.create({
     outterContainer: {
         flex: 1,
-        justifyContent: 'center',
+        marginTop: 60,
+        // justifyContent: 'center',
+        alignItems: 'center',
+    },
+    infoContainer: {
+        marginTop: 20,
         alignItems: 'center',
     },
 });
