@@ -16,7 +16,7 @@ function Screen1({ navigation }) {
         <View style={styles.outterContainer}>
             <ProfilePicture viewed={viewed}/>
             <View>
-                {(!viewed) && <Button onPress={goToScreen2} title="STORY"/>}
+                {(!viewed) && <Button onPress={goToScreen2} title="+"/>}
             </View>
             <View style={styles.infoContainer}>
                 <Text>Shinchan</Text>
