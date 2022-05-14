@@ -6,7 +6,7 @@ import { Colors } from '../constants/Colors';
 
 
 
-function ProfilePicture({ onLongPress, viewed }) { // pass the chooseImg func here
+function ProfilePicture({ viewed, navigation }) { // pass the chooseImg func here
     const [image, setImage] = useState(null);
     const [dialog_visible, set_visible] = useState(false);
 
@@ -44,10 +44,13 @@ function ProfilePicture({ onLongPress, viewed }) { // pass the chooseImg func he
         set_visible(false);
     }
 
+    function handlePress() {
+        navigation.navigate('Story');
+    }
     
     
     return (
-        <Pressable onLongPress={handleOnLongPress}>
+        <Pressable onLongPress={handleOnLongPress} onPress={handlePress}>
             <DialogBox visible={dialog_visible}
                        title = {"Image Options"}
                        description = {"choose image option!"}

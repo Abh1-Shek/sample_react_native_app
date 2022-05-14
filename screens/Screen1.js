@@ -9,12 +9,12 @@ function Screen1({ navigation }) {
     const [viewed, setViewed] = useState(false);
 
     function goToScreen2() {
-        setViewed(true)
-        navigation.navigate('Story')
+        setViewed(true);
+        navigation.navigate('Story');
     }
     return (
         <View style={styles.outterContainer}>
-            <ProfilePicture viewed={viewed}/>
+            <ProfilePicture viewed={viewed} navigation = {navigation}/>
             <View>
                 {(!viewed) && <Button onPress={goToScreen2} title="+"/>}
             </View>

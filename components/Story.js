@@ -8,7 +8,6 @@ import AnimatedProgressView from './AnimatedProgressView';
 const delay = 5000;
 
 export default function Story({imageUrl, description, caption, navigation}) {
-    const [progress, setProgress] = useState(0);
 
     useEffect(
         () => {
@@ -49,6 +48,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: 200,
         margin: 20,
+        borderRadius: 8,
     },
     mainStory: {
         justifyContent: 'center',
