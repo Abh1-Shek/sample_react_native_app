@@ -25,12 +25,12 @@ export default function Story({imageUrl, description, caption, navigation}) {
                 <AnimatedProgressView progress={1} navigation={navigation}/>
             </View>
             <View>
-                <View>
-                    <Image source={{uri: imageUrl}} style={styles.square}/>
+                <View style={styles.mainStory}>
+                    <Image defaultSource = {'../assets/shinchan.jpg'} source={{uri: imageUrl}} style={styles.square}/>
                     <Text>{description}</Text>
                 </View>
-                <View>
-                    <Text>{caption}</Text>
+                <View style={styles.captionContainer}>
+                    <Text style={styles.captionText}>{caption}</Text>
                 </View>
             </View>
         </View>
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     square: {
         height: 200,
         width: 200,
+        margin: 20,
     },
     track: {
         width: 300,
@@ -91,4 +92,15 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'blue',
     },
+    mainStory: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    captionContainer: {
+        marginTop: 20,
+    },
+    captionText: {
+        fontSize: 24,
+        textAlign: 'center',
+    }
 });
