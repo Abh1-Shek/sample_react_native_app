@@ -6,7 +6,7 @@ import { Colors } from '../constants/Colors';
 
 
 
-function ProfilePicture({ viewed, navigation, storyAdded, caption }) { // pass the chooseImg func here
+function ProfilePicture({ viewed, navigation, storyAdded, caption }) {
     const [image, setImage] = useState(null);
     const [dialog_visible, set_visible] = useState(false);
 
@@ -65,10 +65,11 @@ function ProfilePicture({ viewed, navigation, storyAdded, caption }) { // pass t
                        removeImage = {handleRemoveImage}
                        set_visible = {set_visible}/>
             {!image && <Image 
-                style={viewed ? styles.circle : styles.circleNotViewed}
+                // style={viewed ? styles.circle : styles.circleNotViewed}  // add another condition of storyAdded here
+                style={storyAdded ? (viewed ? styles.circle : styles.circleNotViewed): styles.circleNotAdded}
                 source={require('../assets/shinchan.jpg')}></Image>}
             {image && <Image 
-                style={viewed ? styles.circle : styles.circleNotViewed}
+                style={storyAdded ? (viewed ? styles.circle : styles.circleNotViewed): styles.circleNotAdded} // add another condition of storyAdded here
                 source={{uri: image}}></Image>}
         </Pressable>
     );
@@ -93,4 +94,9 @@ const styles = StyleSheet.create({
         borderWidth: 8,
         borderColor: Colors.yellow,
     },
+    circleNotAdded: {
+        height: 200,
+        width: 200,
+        borderRadius: 100,
+    }
 });
