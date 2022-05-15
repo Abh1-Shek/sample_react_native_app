@@ -5,6 +5,7 @@ import Screen2 from './screens/Screen2';
 import Screen3 from './screens/Screen3';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HeaderTitle from './components/HeaderTitle';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,12 @@ export default function App() {
         <Stack.Screen 
           name="Home" 
           component={Screen1}
+          options={{
+            headerTitle: (props) => <HeaderTitle {...props} />,
+            headerShadowVisible: false,
+            headerTransparent: true,
+            
+          }}
           initialParams={{
             viewed: false,
             storyAdded: false,
