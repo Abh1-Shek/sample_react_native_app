@@ -11,7 +11,11 @@ export default function Story({imageUrl, description, caption, navigation}) {
 
     useEffect(
         () => {
-            const timer = setTimeout(() => navigation.navigate('Home'), delay);
+            const timer = setTimeout(() => navigation.navigate('Home', {
+                viewed: true,
+                storyAdded: true,
+                caption: caption,
+            }), delay);
             
             return () => {
                 clearTimeout(timer);

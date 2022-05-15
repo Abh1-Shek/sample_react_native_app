@@ -6,7 +6,7 @@ import { Colors } from '../constants/Colors';
 
 
 
-function ProfilePicture({ viewed, navigation }) { // pass the chooseImg func here
+function ProfilePicture({ viewed, navigation, storyAdded, caption }) { // pass the chooseImg func here
     const [image, setImage] = useState(null);
     const [dialog_visible, set_visible] = useState(false);
 
@@ -45,7 +45,14 @@ function ProfilePicture({ viewed, navigation }) { // pass the chooseImg func her
     }
 
     function handlePress() {
-        navigation.navigate('Story');
+        if (storyAdded) {
+            navigation.navigate('Story', {
+                caption: caption,
+            });
+        }
+        else {
+            navigation.navigate('addStory');
+        }
     }
     
     

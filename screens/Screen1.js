@@ -5,19 +5,13 @@ import Story from '../components/Story';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useState } from 'react';
 
-function Screen1({ navigation }) {
-    const [viewed, setViewed] = useState(false);
+function Screen1({ navigation, route }) {
+    const { viewed, storyAdded, caption } = route.params;
 
-    function goToScreen2() {
-        setViewed(true);
-        navigation.navigate('Story');
-    }
+
     return (
         <View style={styles.outterContainer}>
-            <ProfilePicture viewed={viewed} navigation = {navigation}/>
-            <View>
-                {(!viewed) && <Button onPress={goToScreen2} title="+"/>}
-            </View>
+            <ProfilePicture storyAdded={storyAdded} viewed={viewed} navigation = {navigation} caption={caption}/>
             <View style={styles.infoContainer}>
                 <Text>Shinchan</Text>
                 <Text>My favourite show</Text>
