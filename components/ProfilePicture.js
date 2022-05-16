@@ -81,15 +81,15 @@ export default ProfilePicture;
 
 const styles = StyleSheet.create({
     circle: {
-        height: 200,
-        width: 200,
+        height: 180,
+        width: 180,
         borderRadius: 100,
         borderWidth: 8,
         borderColor: Colors.grey,
     },
     circleNotViewed: {
-        height: 200,
-        width: 200,
+        height: 206,
+        width: 206,
         borderRadius: 100,
         borderWidth: 8,
         borderColor: Colors.yellow,

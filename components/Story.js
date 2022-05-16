@@ -1,8 +1,10 @@
-import { StyleSheet, View, Image, Text } from 'react-native';
-import { useEffect, useState } from 'react';
+import { StyleSheet, View, Image, Text, Dimensions, StatusBar } from 'react-native';
+import { useEffect } from 'react';
 import { Colors } from '../constants/Colors';
 import AnimatedProgressView from './AnimatedProgressView';
 
+const window = Dimensions.get("window");
+const screen = Dimensions.get("screen");
 
 
 const delay = 5000;
@@ -25,6 +27,7 @@ export default function Story({imageUrl, description, caption, navigation}) {
     
     return (
         <View style={styles.root}>
+            <StatusBar translucent backgroundColor="transparent" barStyle='light-content'/>
             <View>
                 <AnimatedProgressView progress={1} navigation={navigation}/>
             </View>
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 40,
+        paddingTop: window.width / 4,
         backgroundColor: Colors.storyBackground,
     },
     square: {

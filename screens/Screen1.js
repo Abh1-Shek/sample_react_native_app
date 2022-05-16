@@ -1,7 +1,7 @@
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, StatusBar } from 'react-native';
 import { Colors } from '../constants/Colors';
 import ProfilePicture from '../components/ProfilePicture';
-import { Svg, G, Line, Ellipse, Circle } from 'react-native-svg';
+import { Svg, G, Line, Ellipse, Circle, Rect, Path } from 'react-native-svg';
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
@@ -12,6 +12,7 @@ function Screen1({ navigation, route }) {
 
     return (
         <View style={styles.outterContainer}>
+            <StatusBar translucent backgroundColor="transparent" barStyle='dark-content'/>
             <ProfilePicture storyAdded={storyAdded} viewed={viewed} navigation = {navigation} caption={caption}/>
             { !storyAdded && 
                 <View style={styles.plusButton}>
@@ -41,6 +42,38 @@ function Screen1({ navigation, route }) {
                 <Text style={styles.nameStyle}>Shinchan</Text>
                 <Text style={styles.bioStyle}>www.shinchan.com</Text>
             </View>
+            <View style={styles.lastRow}>
+                <View style={styles.rowContainer2}>
+                    <Svg xmlns="http://www.w3.org/2000/svg" width="375.997" height="65" viewBox="0 0 375.997 65">
+                        <G id="Group_1" dataName="Group 1" transform="translate(-19.987 -715)">
+                            <G id="Polygon_2" dataName="Polygon 2" transform="translate(174 715)" fill="#fff">
+                            <Path d="M 42.03566360473633 63.5 L 22.96433639526367 63.5 L 7.498528480529785 51.6851806640625 L 1.569981336593628 32.5 L 7.498528003692627 13.31482124328613 L 22.96433639526367 1.500009775161743 L 42.03566360473633 1.500000238418579 L 57.50147247314453 13.3148307800293 L 63.43001937866211 32.5 L 57.50147247314453 51.6851806640625 L 42.03566360473633 63.5 Z" stroke="none"/>
+                            <Path d="M 23.47173309326172 3 L 8.790103912353516 14.21575927734375 L 3.139968872070312 32.5 L 8.790103912353516 50.78422927856445 L 23.47173690795898 62 L 41.52825164794922 62 L 56.20988464355469 50.78422927856445 L 61.86003112792969 32.5 L 56.20988464355469 14.21576309204102 L 41.52825164794922 3 L 23.47173309326172 3 M 22.45694351196289 0 L 42.54304504394531 0 L 58.79304504394531 12.41388702392578 L 65 32.5 L 58.79304504394531 52.58609771728516 L 42.54304504394531 65 L 22.45694351196289 65 L 6.206943511962891 52.58609771728516 L 0 32.5 L 6.206943511962891 12.41388702392578 L 22.45694351196289 0 Z" stroke="none" fill="#fdbb21"/>
+                            </G>
+                            <Line id="Line_1" dataName="Line 1" y1="2" x2="156" transform="translate(20 748)" fill="none" stroke="#fdbb21" strokeWidth="2"/>
+                            <Path id="Path_1" dataName="Path 1" d="M0,0H160.484" transform="translate(235.5 747.5)" fill="none" stroke="#fdbb21" strokeWidth="2"/>
+                        </G>
+                    </Svg>
+                </View>
+                <View style={styles.rowContainer}>
+                    <View>
+                        <Svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+                            <G id="Rectangle_1" dataName="Rectangle 1" fill="#fdbb21" stroke="#fdbb21" strokeLinejoin="round" strokeWidth="1">
+                                <Rect width="60" height="60" stroke="none"/>
+                                <Rect x="0.5" y="0.5" width="59" height="59" fill="none"/>
+                            </G>
+                        </Svg>
+                    </View>
+                    <View>
+                        <Svg xmlns="http://www.w3.org/2000/svg" width="70" height="60" viewBox="0 0 70 60">
+                            <G id="Polygon_1" dataName="Polygon 1" fill="#fdbb21">
+                                <Path d="M 69.12947845458984 59.5 L 0.8705216646194458 59.5 L 35 0.9923228621482849 L 69.12947845458984 59.5 Z" stroke="none"/>
+                                <Path d="M 35 1.984634399414062 L 1.741035461425781 59 L 68.25896453857422 59 L 35 1.984634399414062 M 35 0 L 70 60 L 0 60 L 35 0 Z" stroke="none" fill="#fdbb21"/>
+                            </G>
+                        </Svg>
+                    </View>
+                </View>
+            </View>
         </View>
     );
 }
@@ -52,12 +85,16 @@ const styles = StyleSheet.create({
     outterContainer: {
         flex: 1,
         marginTop: window.height / 4,
-        // justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
     infoContainer: {
-        marginTop: 80,
+        flex: 0.3,
+        // marginTop: 80,
         alignItems: 'center',
+        maxHeight: 70,
+        maxWidth: window.width - 20,
+        // backgroundColor: 'red',
     },
     nameStyle: {
         fontSize: 24,
@@ -68,11 +105,27 @@ const styles = StyleSheet.create({
         color: Colors.grey,
     },
     plusButton: {
-        marginTop: -50,
-        marginLeft: 160,
+        marginTop: -120,
+        marginLeft: 120,
     },
     circlesSvg: {
-        marginTop: -50,
-        marginLeft: 140,
+        marginTop: -120,
+        marginLeft: 120,
+    },
+    rowContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        marginTop: -40,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    rowContainer2: {
+        marginTop: 20,
+    },
+    lastRow: {
+        flex: 0.3,
+        flexDirection: 'column',
+        // justifyContent: 'flex-end',
+        // backgroundColor: 'blue',
     }
 });

@@ -1,5 +1,5 @@
 // this screen is for adding story
-import { StyleSheet, View, Pressable, Modal, TextInput, Text } from 'react-native';
+import { StyleSheet, View, StatusBar, Modal, TextInput } from 'react-native';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 import { useState } from 'react';
 import AwesomeButton from 'react-native-really-awesome-button';
@@ -34,6 +34,7 @@ function Screen3({ navigation }) {
 
     return (
     <View style={styles.rootContainer}>
+        <StatusBar translucent backgroundColor="transparent" barStyle='dark-content'/>
         <View style={styles.buttonStyle}>
             <AwesomeButtonRick>add a story</AwesomeButtonRick>
         </View>

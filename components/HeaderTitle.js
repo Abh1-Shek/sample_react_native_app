@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     backButton: {
-        marginTop: 30,
+        marginTop: 20,
         width: 70,
     },
     drawerButton: {
-        marginTop: 30,
+        marginTop: 20,
         width: 70,
     }
 });
