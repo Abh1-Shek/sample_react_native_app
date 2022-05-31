@@ -3,13 +3,19 @@ import React, { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import DialogBox from './DialogBox';
 import { Colors } from '../constants/Colors';
+import USER_ID from '../assets/queries/userInfo';
+import UPDATE_PROFILE_PICTURE from '../assets/queries/ProfilePictureUpdation';
+import { useMutation } from '@apollo/client';
 
 
 
+// this component shows the profile picture and handle the events on profile picture
 function ProfilePicture({ viewed, navigation, storyAdded, caption }) {
-    const [image, setImage] = useState(null);
-    const [dialog_visible, set_visible] = useState(false);
 
+    const [image, setImage] = useState(null);
+    const [dialog_visible, set_visible] = useState(false);  // sets the visibility of dialog box
+    const [func, {loading, error, data}] = useMutation(UPDATE_PROFILE_PICTURE, { variables: {id: USER_ID, link: image} });
+    // code to handle image stuff
     useEffect(() => {
 		(async () => {
 		if (Platform.OS !== 'web') {
@@ -19,7 +25,17 @@ function ProfilePicture({ viewed, navigation, storyAdded, caption }) {
 			}
 		}
 		})();
-	}, []);
+	}, []); 
+
+    // code to check the type of image
+    useEffect(() => {
+        if (image) {
+            // query to do update the profile picture
+            func();
+            // console.log(image);
+            // console.log(data);
+        }
+    }, [image]);
 
     const chooseImg = async () => {
 		let result = await ImagePicker.launchImageLibraryAsync({
@@ -65,7 +81,6 @@ function ProfilePicture({ viewed, navigation, storyAdded, caption }) {
                        removeImage = {handleRemoveImage}
                        set_visible = {set_visible}/>
             {!image && <Image 
-                // style={viewed ? styles.circle : styles.circleNotViewed}  // add another condition of storyAdded here
                 style={storyAdded ? (viewed ? styles.circle : styles.circleNotViewed): styles.circleNotAdded}
                 source={require('../assets/shinchan.jpg')}></Image>}
             {image && <Image 
