@@ -4,8 +4,8 @@ import {
 
 
 const USER_DETAILS = gql`
-  query {
-    getUserDetails(id: 1) {
+  query ($USER_ID: Int) {
+    getUserDetails(id: $USER_ID) {
         userName
         userBio
         link

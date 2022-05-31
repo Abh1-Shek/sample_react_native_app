@@ -5,16 +5,22 @@ import { Svg, G, Line, Ellipse, Circle, Rect, Path } from 'react-native-svg';
 import {
     useQuery
   } from "@apollo/client";
-import USER_DETAILS from '../assets/queries/UserDetails';
+import USER_DETAILS from '../assets/queries/UserDetails'; // a query to fetch data from graphql api
+import USER_ID from '../assets/queries/userInfo';
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
+
+// this is the main screen it shows profile pic user information
 function Screen1({ navigation, route }) {
     const { viewed, storyAdded, caption } = route.params;
-    const { loading, error, data } = useQuery(USER_DETAILS);
+    // below code fetches user information from the data according to USER_ID which it gets from another js file
+    const { loading, error, data } = useQuery(USER_DETAILS,{
+        variables: { USER_ID }
+    });
 
-    if (loading) return <Text>Loading...</Text>;
+    // if (loading) return <Text>Loading...</Text>;
     if (error) return <Text>{error.message}</Text>;
 
     return (
@@ -46,8 +52,9 @@ function Screen1({ navigation, route }) {
                 </View>
             }
             <View style={styles.infoContainer}>
-                <Text style={styles.nameStyle}>{data.getUserDetails.userName}</Text>
-                <Text style={styles.bioStyle}>{data.getUserDetails.userBio}</Text>
+                { !loading && <Text style={styles.nameStyle}>{data.getUserDetails.userName}</Text> }
+                { loading && <Text>Loading info...</Text> }
+                { !loading && <Text style={styles.bioStyle}>{data.getUserDetails.userBio}</Text> }
             </View>
             <View style={styles.lastRow}>
                 <View style={styles.rowContainer2}>
