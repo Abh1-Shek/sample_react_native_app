@@ -2,13 +2,20 @@ import { StyleSheet, View, Text, Dimensions, StatusBar } from 'react-native';
 import { Colors } from '../constants/Colors';
 import ProfilePicture from '../components/ProfilePicture';
 import { Svg, G, Line, Ellipse, Circle, Rect, Path } from 'react-native-svg';
+import {
+    useQuery
+  } from "@apollo/client";
+import USER_DETAILS from '../assets/queries/UserDetails';
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
 function Screen1({ navigation, route }) {
     const { viewed, storyAdded, caption } = route.params;
+    const { loading, error, data } = useQuery(USER_DETAILS);
 
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>{error.message}</Text>;
 
     return (
         <View style={styles.outterContainer}>
@@ -39,8 +46,8 @@ function Screen1({ navigation, route }) {
                 </View>
             }
             <View style={styles.infoContainer}>
-                <Text style={styles.nameStyle}>Shinchan</Text>
-                <Text style={styles.bioStyle}>www.shinchan.com</Text>
+                <Text style={styles.nameStyle}>{data.getUserDetails.userName}</Text>
+                <Text style={styles.bioStyle}>{data.getUserDetails.userBio}</Text>
             </View>
             <View style={styles.lastRow}>
                 <View style={styles.rowContainer2}>
