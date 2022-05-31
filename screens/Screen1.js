@@ -26,7 +26,7 @@ function Screen1({ navigation, route }) {
     return (
         <View style={styles.outterContainer}>
             <StatusBar translucent backgroundColor="transparent" barStyle='dark-content'/>
-            <ProfilePicture storyAdded={storyAdded} viewed={viewed} navigation = {navigation} caption={caption}/>
+            <ProfilePicture storyAdded={storyAdded} viewed={viewed} navigation = {navigation} caption={caption} imageLink={ loading ? null : data.getUserDetails.link}/>
             { !storyAdded && 
                 <View style={styles.plusButton}>
                     <Svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" viewBox="0 0 25 27">

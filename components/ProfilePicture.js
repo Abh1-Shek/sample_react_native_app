@@ -10,9 +10,10 @@ import { useMutation } from '@apollo/client';
 
 
 // this component shows the profile picture and handle the events on profile picture
-function ProfilePicture({ viewed, navigation, storyAdded, caption }) {
+function ProfilePicture({ viewed, navigation, storyAdded, caption, imageLink }) {
 
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(imageLink);
+    console.log("passed link information =>", imageLink);
     const [dialog_visible, set_visible] = useState(false);  // sets the visibility of dialog box
     const [func, {loading, error, data}] = useMutation(UPDATE_PROFILE_PICTURE, { variables: {id: USER_ID, link: image} });
     // code to handle image stuff
@@ -82,7 +83,7 @@ function ProfilePicture({ viewed, navigation, storyAdded, caption }) {
                        set_visible = {set_visible}/>
             {!image && <Image 
                 style={storyAdded ? (viewed ? styles.circle : styles.circleNotViewed): styles.circleNotAdded}
-                source={require('../assets/shinchan.jpg')}></Image>}
+                source={ imageLink ? {uri: imageLink} : require('../assets/shinchan.jpg')}></Image>}
             {image && <Image 
                 style={storyAdded ? (viewed ? styles.circle : styles.circleNotViewed): styles.circleNotAdded} // add another condition of storyAdded here
                 source={{uri: image}}></Image>}
